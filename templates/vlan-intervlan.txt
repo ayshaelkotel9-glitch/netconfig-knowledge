@@ -1,9 +1,30 @@
+ip routing
+
 vlan 10
  name ADMIN
 vlan 20
  name SOINS
 vlan 30
  name INVITES
+vlan 99
+ name NATIF
+vlan 999
+ name POUBELLE
+
 interface vlan 10
  ip address 192.168.10.1 255.255.255.0
  no shutdown
+interface vlan 20
+ ip address 192.168.20.1 255.255.255.0
+ no shutdown
+interface vlan 30
+ ip address 192.168.30.1 255.255.255.0
+ no shutdown
+
+interface gigabitEthernet 0/1
+ description TRUNK vers R1
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30
+ switchport mode trunk
+ switchport nonegotiate
